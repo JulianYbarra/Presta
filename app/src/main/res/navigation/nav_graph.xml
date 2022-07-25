@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeDest">
+    <fragment
+        android:id="@+id/homeDest"
+        android:name="com.junka.presta.ui.home.HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeDest_to_loansCreateDest"
+            app:destination="@id/loansCreateDest" />
+        <action
+            android:id="@+id/action_homeDest_to_loansUpdateDest"
+            app:destination="@id/loansUpdateDest" />
+    </fragment>
+    <dialog
+        android:id="@+id/loansCreateDest"
+        android:name="com.junka.presta.ui.loans.create.LoansCreateFragment"
+        tools:layout="@layout/fragment_loans_create" />
+    <dialog
+        android:id="@+id/loansUpdateDest"
+        android:name="com.junka.presta.ui.loans.update.LoansUpdateFragment"
+        tools:layout="@layout/fragment_loans_create">
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </dialog>
+</navigation>
