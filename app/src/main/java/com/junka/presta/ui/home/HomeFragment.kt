@@ -1,7 +1,6 @@
 package com.junka.presta.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,7 +17,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var binding: FragmentHomeBinding
     private val viewModel by viewModels<HomeViewModel>()
     private val userAdapter by lazy {
-        UserAdapter(
+        LoanAdapter(
             onClick = {
                 val action = HomeFragmentDirections.actionHomeDestToLoansUpdateDest(it.id)
                 findNavController().navigate(action)

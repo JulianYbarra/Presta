@@ -7,6 +7,6 @@ import com.junka.domain.Loan
 @BindingAdapter("items")
 fun RecyclerView.setItems(loans: List<Loan>?) {
     if (loans != null) {
-        (adapter as? UserAdapter)?.submitList(loans)
+        (adapter as? LoanAdapter)?.submitList(loans)
     }
 }

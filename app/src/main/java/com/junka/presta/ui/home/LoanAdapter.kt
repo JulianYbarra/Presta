@@ -10,10 +10,10 @@ import com.junka.presta.common.basicDiffUtil
 import com.junka.presta.common.inflate
 import com.junka.presta.databinding.ViewLoansLayoutBinding
 
-class UserAdapter(
+class LoanAdapter(
     private val onClick: (Loan) -> Unit,
     private val onLongClick: (Loan) -> Unit
-) : ListAdapter<Loan, UserAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
+) : ListAdapter<Loan, LoanAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.view_loans_layout,false)
@@ -21,13 +21,13 @@ class UserAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val user = getItem(position)
-        holder.bind(user)
+        val loan = getItem(position)
+        holder.bind(loan)
         holder.itemView.setOnClickListener {
-            onClick(user)
+            onClick(loan)
         }
         holder.itemView.setOnLongClickListener {
-            onLongClick(user)
+            onLongClick(loan)
             true
         }
     }
