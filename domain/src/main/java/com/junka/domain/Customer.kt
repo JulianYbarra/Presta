@@ -1,6 +1,6 @@
 package com.junka.domain
 
-data class Loan(
+data class Customer(
     val id : String,
     val name : String,
     val lastName : String,

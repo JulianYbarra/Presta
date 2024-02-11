@@ -1,4 +1,4 @@
-package com.junka.presta.ui.loans.create
+package com.junka.presta.ui.customer.create
 
 import android.animation.Animator
 import android.os.Bundle
@@ -11,34 +11,34 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.junka.presta.R
 import com.junka.presta.common.launchAndCollect
-import com.junka.presta.databinding.FragmentLoansCreateBinding
-import com.junka.presta.ui.loans.create.LoansCreateViewModel.UiState
+import com.junka.presta.databinding.FragmentCustomerCreateBinding
+import com.junka.presta.ui.customer.create.CustomerCreateViewModel.UiState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoansCreateFragment : BottomSheetDialogFragment() {
+class CustomerCreateFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentLoansCreateBinding
-    private val viewModel by viewModels<LoansCreateViewModel>()
+    private lateinit var binding: FragmentCustomerCreateBinding
+    private val viewModel by viewModels<CustomerCreateViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_loans_create, container, false)
+        return inflater.inflate(R.layout.fragment_customer_create, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLoansCreateBinding.bind(view)
+        binding = FragmentCustomerCreateBinding.bind(view)
         binding.setUi()
 
         launchAndCollect(viewModel.state) { setUiState(it) }
     }
 
-    private fun FragmentLoansCreateBinding.setUi() {
+    private fun FragmentCustomerCreateBinding.setUi() {
         saveBtn.setOnClickListener {
             if (validateForm()) {
                 viewModel.create(

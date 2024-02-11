@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.junka.domain.Loan" />
+        <import type="com.junka.domain.Customer" />
 
         <variable
-            name="user"
-            type="com.junka.domain.Loan" />
+            name="customer"
+            type="com.junka.domain.Customer" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -30,7 +30,7 @@
                 android:id="@+id/stateView"
                 android:layout_width="4dp"
                 android:layout_height="0dp"
-                app:statusColor="@{user.status}"
+                app:statusColor="@{customer.status}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -40,7 +40,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@{user.fullName}"
+                android:text="@{customer.fullName}"
                 app:layout_constraintStart_toEndOf="@id/stateView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -51,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@{Integer.toString(user.dni)}"
+                android:text="@{Integer.toString(customer.dni)}"
                 app:layout_constraintStart_toEndOf="@id/stateView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameTv"
@@ -61,8 +61,8 @@
                 android:id="@+id/statusTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{user.status.value}"
-                app:statusColor="@{user.status}"
+                android:text="@{customer.status.value}"
+                app:statusColor="@{customer.status}"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toEndOf="@id/stateView"
                 app:layout_constraintEnd_toEndOf="parent"

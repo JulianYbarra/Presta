@@ -4,19 +4,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.junka.domain.Loan
+import com.junka.domain.Customer
 import com.junka.presta.R
 import com.junka.presta.common.basicDiffUtil
 import com.junka.presta.common.inflate
-import com.junka.presta.databinding.ViewLoansLayoutBinding
+import com.junka.presta.databinding.ViewCustomerLayoutBinding
 
-class LoanAdapter(
-    private val onClick: (Loan) -> Unit,
-    private val onLongClick: (Loan) -> Unit
-) : ListAdapter<Loan, LoanAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
+class CustomerAdapter(
+    private val onClick: (Customer) -> Unit,
+    private val onLongClick: (Customer) -> Unit
+) : ListAdapter<Customer, CustomerAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = parent.inflate(R.layout.view_loans_layout,false)
+        val view = parent.inflate(R.layout.view_customer_layout,false)
         return ViewHolder(view)
     }
 
@@ -33,10 +33,10 @@ class LoanAdapter(
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ViewLoansLayoutBinding.bind(view)
+        private val binding = ViewCustomerLayoutBinding.bind(view)
 
-        fun bind(loan: Loan){
-            binding.user = loan
+        fun bind(customer: Customer){
+            binding.customer = customer
         }
     }
 }

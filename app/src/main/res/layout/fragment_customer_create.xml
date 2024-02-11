@@ -5,16 +5,11 @@
 
     <data>
 
-        <import type="com.junka.domain.Loan.Status"/>
-        <import type="com.junka.domain.Loan" />
+        <import type="com.junka.domain.Customer.Status"/>
 
         <variable
             name="loading"
             type="boolean" />
-
-        <variable
-            name="user"
-            type="Loan" />
 
         <variable
             name="status"
@@ -38,8 +33,7 @@
                 android:id="@+id/nameEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="@{user.name}" />
+                android:inputType="textPersonName"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,8 +49,7 @@
                 android:id="@+id/lastnameEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="@{user.lastName}" />
+                android:inputType="textPersonName"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,21 +64,20 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dniEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="@{Integer.toString(user.dni)}" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/saveBtn"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:enabled="@{!loading}"
             android:text="@string/save"
+            android:enabled="@{!loading}"
             app:layout_constraintBottom_toTopOf="@id/cancelBtn"
             app:layout_constraintTop_toBottomOf="@id/dniL" />
 
@@ -101,19 +93,20 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="?android:colorBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:visible="@{loading}"
-            tools:visibility="visible">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/loadingAnimation"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
                 app:custom_lottie_autoPlay="@{true}"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/loading" />
+                app:lottie_rawRes="@raw/loading"
+                android:layout_gravity="center"/>
+
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/stateAnimation"
@@ -122,6 +115,7 @@
                 app:custom_lottie_autoPlay="@{true}"
                 app:custom_lottie_rawId="@{status}"
                 android:layout_gravity="center"/>
+
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

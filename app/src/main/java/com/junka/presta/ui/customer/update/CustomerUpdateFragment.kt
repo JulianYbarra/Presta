@@ -1,4 +1,4 @@
-package com.junka.presta.ui.loans.update
+package com.junka.presta.ui.customer.update
 
 import android.animation.Animator
 import android.os.Bundle
@@ -11,15 +11,15 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.junka.presta.R
 import com.junka.presta.common.launchAndCollect
-import com.junka.presta.databinding.FragmentLoansUpdateBinding
-import com.junka.presta.ui.loans.update.LoansUpdateViewModel.UiState
+import com.junka.presta.databinding.FragmentCustomerUpdateBinding
+import com.junka.presta.ui.customer.update.CustomerUpdateViewModel.UiState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoansUpdateFragment : BottomSheetDialogFragment() {
+class CustomerUpdateFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentLoansUpdateBinding
-    private val viewModel by viewModels<LoansUpdateViewModel>()
+    private lateinit var binding: FragmentCustomerUpdateBinding
+    private val viewModel by viewModels<CustomerUpdateViewModel>()
 
 
     override fun onCreateView(
@@ -27,19 +27,19 @@ class LoansUpdateFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_loans_update, container, false)
+        return inflater.inflate(R.layout.fragment_customer_update, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLoansUpdateBinding.bind(view)
+        binding = FragmentCustomerUpdateBinding.bind(view)
         binding.setUi()
 
         launchAndCollect(viewModel.state) { setUiState(it) }
     }
 
-    private fun FragmentLoansUpdateBinding.setUi() {
+    private fun FragmentCustomerUpdateBinding.setUi() {
         saveBtn.setOnClickListener {
             if (validateForm()) {
                 viewModel.update(
@@ -70,7 +70,7 @@ class LoansUpdateFragment : BottomSheetDialogFragment() {
 
     private fun setUiState(uiState: UiState) = with(binding) {
         binding.loading = uiState.loading
-        uiState.loan?.let { binding.user = it }
+        uiState.customer?.let { binding.customer = it }
         binding.status = uiState.status
     }
 

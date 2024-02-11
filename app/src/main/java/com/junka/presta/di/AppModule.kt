@@ -1,7 +1,7 @@
 package com.junka.presta.di
 
 import com.junka.presta.BuildConfig
-import com.junka.presta.data.remote.LoanService
+import com.junka.presta.data.remote.CustomerService
 import com.junka.presta.data.remote.ScoreService
 import dagger.Module
 import dagger.Provides
@@ -37,7 +37,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRemoteService(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): LoanService {
+    fun provideRemoteService(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): CustomerService {
         return Retrofit.Builder()
             .baseUrl(apiUrl)
             .client(okHttpClient)

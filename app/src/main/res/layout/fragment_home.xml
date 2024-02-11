@@ -6,15 +6,15 @@
     <data>
 
         <import type="java.util.List" />
-        <import type="com.junka.domain.Loan"/>
+        <import type="com.junka.domain.Customer"/>
 
         <variable
             name="loading"
             type="boolean" />
 
         <variable
-            name="users"
-            type="List&lt;Loan>" />
+            name="customers"
+            type="List&lt;Customer>" />
 
         <variable
             name="error"
@@ -50,9 +50,9 @@
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:items="@{users}"
+            app:items="@{customers}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/view_loans_layout"/>
+            tools:listitem="@layout/view_customer_layout"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

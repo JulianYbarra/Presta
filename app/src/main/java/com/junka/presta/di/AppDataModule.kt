@@ -1,7 +1,7 @@
 package com.junka.presta.di
 
-import com.junka.data.LoanDataSource
-import com.junka.presta.data.remote.LoanRemoteDataSource
+import com.junka.data.CustomerDataSource
+import com.junka.presta.data.remote.CustomerRemoteDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,5 +12,5 @@ import dagger.hilt.components.SingletonComponent
 abstract class AppDataModule {
 
     @Binds
-    abstract fun bindLoanDataSource(loanRemoteDataSource: LoanRemoteDataSource) : LoanDataSource
+    abstract fun bindCustomerDataSource(customerRemoteDataSource: CustomerRemoteDataSource) : CustomerDataSource
 }

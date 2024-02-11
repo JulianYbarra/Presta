@@ -9,20 +9,20 @@
         android:name="com.junka.presta.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeDest_to_loansCreateDest"
-            app:destination="@id/loansCreateDest" />
+            android:id="@+id/to_customerCreateDest"
+            app:destination="@id/customerCreateDest" />
         <action
-            android:id="@+id/action_homeDest_to_loansUpdateDest"
-            app:destination="@id/loansUpdateDest" />
+            android:id="@+id/to_customerUpdateDest"
+            app:destination="@id/customerUpdateDest" />
     </fragment>
     <dialog
-        android:id="@+id/loansCreateDest"
-        android:name="com.junka.presta.ui.loans.create.LoansCreateFragment"
-        tools:layout="@layout/fragment_loans_create" />
+        android:id="@+id/customerCreateDest"
+        android:name="com.junka.presta.ui.customer.create.CustomerCreateFragment"
+        tools:layout="@layout/fragment_customer_create" />
     <dialog
-        android:id="@+id/loansUpdateDest"
-        android:name="com.junka.presta.ui.loans.update.LoansUpdateFragment"
-        tools:layout="@layout/fragment_loans_create">
+        android:id="@+id/customerUpdateDest"
+        android:name="com.junka.presta.ui.customer.update.CustomerUpdateFragment"
+        tools:layout="@layout/fragment_customer_update">
         <argument
             android:name="id"
             app:argType="string" />

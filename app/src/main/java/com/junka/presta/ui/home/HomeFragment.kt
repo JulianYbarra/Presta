@@ -16,14 +16,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     lateinit var binding: FragmentHomeBinding
     private val viewModel by viewModels<HomeViewModel>()
-    private val userAdapter by lazy {
-        LoanAdapter(
+    private val customerAdapter by lazy {
+        CustomerAdapter(
             onClick = {
-                val action = HomeFragmentDirections.actionHomeDestToLoansUpdateDest(it.id)
+                val action = HomeFragmentDirections.toCustomerUpdateDest(it.id)
                 findNavController().navigate(action)
             },
-            onLongClick = { user ->
-                viewModel.onDelete(user)
+            onLongClick = { customer ->
+                viewModel.onDelete(customer)
             }
         )
     }
@@ -38,9 +38,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun FragmentHomeBinding.setUi() {
-        recycler.adapter = userAdapter
+        recycler.adapter = customerAdapter
         createFab.setOnClickListener {
-            findNavController().navigate(R.id.loansCreateDest)
+            findNavController().navigate(R.id.customerCreateDest)
         }
         swipeRefresh.setOnRefreshListener {
             swipeRefresh.isRefreshing = false
@@ -51,7 +51,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setUiState(uiState: HomeViewModel.UiState) {
         binding.apply {
             loading = uiState.loading
-            users = uiState.loans
+            customers = uiState.customers
         }
     }
 }

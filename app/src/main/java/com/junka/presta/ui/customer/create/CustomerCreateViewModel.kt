@@ -1,11 +1,11 @@
-package com.junka.presta.ui.loans.create
+package com.junka.presta.ui.customer.create
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.junka.domain.Error
 import com.junka.domain.Resource
-import com.junka.domain.Loan
-import com.junka.usecases.ScoreLoanUseCase
+import com.junka.domain.Customer
+import com.junka.usecases.ScoreCustomerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoansCreateViewModel @Inject constructor(
-    private val scoreLoanUseCase: ScoreLoanUseCase
+class CustomerCreateViewModel @Inject constructor(
+    private val scoreCustomerUseCase: ScoreCustomerUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
@@ -25,14 +25,14 @@ class LoansCreateViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { _state.value.copy(loading = true) }
 
-            val loan = Loan(
+            val customer = Customer(
                 id = "",
                 name = name,
                 lastName = lastName,
                 dni = dni,
-                status = Loan.Status.ERROR
+                status = Customer.Status.ERROR
             )
-            val result = scoreLoanUseCase(loan)
+            val result = scoreCustomerUseCase(customer)
 
             _state.update {
                 when(result){
@@ -45,7 +45,7 @@ class LoansCreateViewModel @Inject constructor(
 
     data class UiState(
         val loading : Boolean = false,
-        val status : Loan.Status? = null,
+        val status : Customer.Status? = null,
         val error : Error? = null
     )
 }
