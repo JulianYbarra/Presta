@@ -1,5 +1,6 @@
 package com.junka.presta.di
 
+import com.junka.presta.BuildConfig
 import com.junka.presta.data.remote.MonService
 import com.junka.presta.data.remote.ScoreService
 import dagger.Module
@@ -20,12 +21,12 @@ object AppModule {
     @Provides
     @Singleton
     @ApiUrl
-    fun provideApiUrl() : String = "https://wired-torus-98413.firebaseio.com/"
+    fun provideApiUrl() : String = "https://chat-21f2b-default-rtdb.firebaseio.com/"
 
     @Provides
     @Singleton
     @ApiScoreUrl
-    fun provideApiScoreUrl() : String = "https://api.moni.com.ar/"
+    fun provideApiScoreUrl() : String = BuildConfig.URL_BASE
 
     @Provides
     @Singleton

@@ -54,17 +54,17 @@ class LoansUpdateFragment : BottomSheetDialogFragment() {
         }
 
         stateAnimation.addAnimatorListener(object : Animator.AnimatorListener{
-            override fun onAnimationStart(p0: Animator?) {
+            override fun onAnimationStart(p0: Animator) {
                 loadingAnimation.isVisible = false
             }
 
-            override fun onAnimationEnd(p0: Animator?) {
+            override fun onAnimationEnd(p0: Animator) {
                 findNavController().popBackStack()
             }
 
-            override fun onAnimationCancel(p0: Animator?) = Unit
+            override fun onAnimationCancel(p0: Animator) = Unit
 
-            override fun onAnimationRepeat(p0: Animator?) = Unit
+            override fun onAnimationRepeat(p0: Animator) = Unit
         })
     }
 

@@ -8,16 +8,21 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.junka.presta"
         minSdk 25
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        buildConfigField "String", "URL_BASE", "\"${properties.getProperty("URL_BASE")}\""
     }
 
     buildTypes {
@@ -37,6 +42,7 @@ android {
     buildFeatures {
         dataBinding true
     }
+    namespace 'com.junka.presta'
 }
 
 dependencies {
