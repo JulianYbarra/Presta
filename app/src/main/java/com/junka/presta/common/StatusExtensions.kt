@@ -6,7 +6,7 @@ import com.junka.domain.Loan.Status.*
 import com.junka.presta.R
 
 fun Context.statusColor(status: Loan.Status) = when (status) {
-    ERROR -> getColor(R.color.black)
-    APPROVE -> getColor(R.color.green)
-    REJECTED -> getColor(R.color.red)
+    ERROR -> getColor(R.color.md_theme_tertiary)
+    APPROVE -> getColor(R.color.md_theme_primary)
+    REJECTED -> getColor(R.color.md_theme_error)
 }
