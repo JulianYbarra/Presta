@@ -9,12 +9,12 @@ import com.junka.presta.data.remote.model.toDomainModel
 import javax.inject.Inject
 
 class LoanRemoteDataSource @Inject constructor(
-    private val monService: MonService,
+    private val loanService: LoanService,
     private val scoreService: ScoreService
 ) : LoanDataSource {
 
     override suspend fun getLoans(): Resource<List<Loan>> = tryCall {
-        monService.getLoans().mapNotNull { map ->
+        loanService.getLoans().mapNotNull { map ->
             map.value.toDomainModel(map.key)
         }
     }.fold(
@@ -22,7 +22,7 @@ class LoanRemoteDataSource @Inject constructor(
         ifRight = { Resource.Success(data = it) })
 
     override suspend fun getLoan(id: String): Resource<Loan?> = tryCall {
-        monService.getLoan(id)?.toDomainModel(id)
+        loanService.getLoan(id)?.toDomainModel(id)
     }.fold(
         ifLeft = { Resource.Error(error = it, data = null) },
         ifRight = { Resource.Success(it) }
@@ -38,21 +38,21 @@ class LoanRemoteDataSource @Inject constructor(
     )
 
     override suspend fun save(loan: Loan): Resource<Loan> = tryCall {
-        monService.postLoan(loan.fromDomainModel())
+        loanService.postLoan(loan.fromDomainModel())
     }.fold(
         ifLeft = { Resource.Error(error = it, data = loan) },
         ifRight = { Resource.Success(data = loan.copy(id = it.name)) }
     )
 
     override suspend fun delete(loan: Loan): Resource<Boolean> = tryCall {
-        monService.deleteLoan(loan.id)
+        loanService.deleteLoan(loan.id)
     }.fold(
         ifLeft = { Resource.Error(error = it, data = false) },
         ifRight = { Resource.Success(data = true) }
     )
 
     override suspend fun update(loan: Loan): Resource<Loan> = tryCall {
-        monService.putLoan(loan.id, loan.fromDomainModel())
+        loanService.putLoan(loan.id, loan.fromDomainModel())
     }.fold(
         ifLeft = { Resource.Error(error = it, data = loan) },
         ifRight = { Resource.Success(data = it.toDomainModel(loan.id))}

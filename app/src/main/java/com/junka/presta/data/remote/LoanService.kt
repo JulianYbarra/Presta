@@ -9,7 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Body
 
-interface MonService {
+interface LoanService {
 
     @GET("users.json")
     suspend fun getLoans() : Map<String, Loan>
