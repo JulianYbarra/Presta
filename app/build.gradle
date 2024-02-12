@@ -23,6 +23,7 @@ android {
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
         buildConfigField "String", "URL_BASE", "\"${properties.getProperty("URL_BASE")}\""
+        buildConfigField "String", "URL_REALTIME", "\"${properties.getProperty("URL_REALTIME")}\""
     }
 
     buildTypes {

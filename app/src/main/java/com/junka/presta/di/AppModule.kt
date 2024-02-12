@@ -21,7 +21,7 @@ object AppModule {
     @Provides
     @Singleton
     @ApiUrl
-    fun provideApiUrl() : String = "https://chat-21f2b-default-rtdb.firebaseio.com/"
+    fun provideApiUrl() : String = BuildConfig.URL_REALTIME
 
     @Provides
     @Singleton
