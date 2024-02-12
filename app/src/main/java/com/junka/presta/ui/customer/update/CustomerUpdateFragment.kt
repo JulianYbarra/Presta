@@ -112,7 +112,7 @@ class CustomerUpdateFragment : BottomSheetDialogFragment() {
     }
 
     private fun validateStringIsNumber(str: String): String? {
-        return if (str.toIntOrNull() == null) {
+        return if (!str.any { it.isDigit() }) {
             getString(R.string.form_required_number_field)
         }else{
             null
