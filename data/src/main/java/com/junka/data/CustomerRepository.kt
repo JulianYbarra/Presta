@@ -14,19 +14,13 @@ class CustomerRepository @Inject constructor(
 
     suspend fun save(customer: Customer) = remoteDataSource.save(customer)
 
-    suspend fun scoreAndSave(customer: Customer): Resource<Customer> {
-        val result = remoteDataSource.score(customer)
-        return when (result) {
-            is Resource.Error -> result
-            is Resource.Success -> {
-                result.data.let { data ->
-                    if (data.id != "") {
-                        update(result.data)
-                    } else {
-                        save(result.data)
-                    }
-                }
-            }
+    suspend fun score(customer: Customer): Resource<Customer> = remoteDataSource.score(customer)
+
+    suspend fun saveOrUpdate(customer: Customer) : Resource<Customer>{
+        return if (customer.id != ""){
+            update(customer)
+        }else{
+            save(customer)
         }
     }
 
