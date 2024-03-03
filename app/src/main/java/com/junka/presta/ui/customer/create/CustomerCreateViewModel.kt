@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.junka.domain.Error
 import com.junka.domain.Resource
 import com.junka.domain.Customer
+import com.junka.domain.Score
 import com.junka.usecases.ScoreCustomerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,14 +31,14 @@ class CustomerCreateViewModel @Inject constructor(
                 name = name,
                 lastName = lastName,
                 dni = dni,
-                status = Customer.Status.ERROR
+                score = null
             )
             val result = scoreCustomerUseCase(customer)
 
             _state.update {
                 when(result){
-                    is Resource.Error -> UiState(error = result.error)
-                    is Resource.Success -> UiState(loading = true,status = result.data.status)
+                    is Resource.Failure -> UiState(error = result.error)
+                    is Resource.Success -> UiState(loading = true,status = result.data.score)
                 }
             }
         }
@@ -45,7 +46,7 @@ class CustomerCreateViewModel @Inject constructor(
 
     data class UiState(
         val loading : Boolean = false,
-        val status : Customer.Status? = null,
+        val status : Score? = null,
         val error : Error? = null
     )
 }

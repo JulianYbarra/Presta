@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.junka.domain.Error
 import com.junka.domain.Resource
 import com.junka.domain.Customer
+import com.junka.domain.ScoreStatus
 import com.junka.usecases.GetCustomerByIdUseCase
 import com.junka.usecases.ScoreCustomerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,7 +34,7 @@ class CustomerUpdateViewModel @Inject constructor(
             val result = getCustomerByIdUseCase(id)
             _state.update {
                 when (result) {
-                    is Resource.Error -> UiState(error = result.error)
+                    is Resource.Failure -> UiState(error = result.error)
                     is Resource.Success -> UiState(customer = result.data)
                 }
             }
@@ -50,11 +51,11 @@ class CustomerUpdateViewModel @Inject constructor(
 
                 _state.update {
                     when (result) {
-                        is Resource.Error -> UiState(error = result.error)
+                        is Resource.Failure -> UiState(error = result.error)
                         is Resource.Success -> UiState(
                             loading = true,
-                            customer = result.data,
-                            status = result.data.status
+                            customer = result. data,
+                            status = result.data.score?.getScoreStatus()
                         )
                     }
                 }
@@ -68,7 +69,7 @@ class CustomerUpdateViewModel @Inject constructor(
     data class UiState(
         val loading: Boolean = false,
         val customer: Customer? = null,
-        val status : Customer.Status? = null,
+        val status : ScoreStatus? = null,
         val error: Error? = null
     )
 }

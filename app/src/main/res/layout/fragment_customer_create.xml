@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.junka.domain.Customer.Status" />
+        <import type="com.junka.domain.ScoreStatus" />
 
         <variable
             name="loading"
@@ -13,7 +13,7 @@
 
         <variable
             name="status"
-            type="Status" />
+            type="ScoreStatus" />
     </data>
 
     <androidx.core.widget.NestedScrollView

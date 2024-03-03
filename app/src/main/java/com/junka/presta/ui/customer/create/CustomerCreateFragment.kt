@@ -69,7 +69,10 @@ class CustomerCreateFragment : BottomSheetDialogFragment() {
 
     private fun setUiState(uiState: UiState) = with(binding) {
         binding.loading = uiState.loading
-        binding.status = uiState.status
+        uiState.status?.let {
+            binding.status = it.getScoreStatus()
+        }
+
     }
 
     private fun validateForm(): Boolean {

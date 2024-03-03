@@ -70,8 +70,12 @@ class CustomerUpdateFragment : BottomSheetDialogFragment() {
 
     private fun setUiState(uiState: UiState) = with(binding) {
         binding.loading = uiState.loading
-        uiState.customer?.let { binding.customer = it }
-        binding.status = uiState.status
+        uiState.customer?.let { customer ->
+            binding.customer = customer
+        }
+        uiState.status?.let {
+            binding.status = it
+        }
     }
 
     private fun validateForm(): Boolean {

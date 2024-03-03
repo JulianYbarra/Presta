@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
             val result = getCustomersUseCase()
             _state.update {
                 when (result) {
-                    is Resource.Error -> UiState(error = result.error, customers = emptyList())
+                    is Resource.Failure -> UiState(error = result.error, customers = emptyList())
                     is Resource.Success -> UiState(customers = result.data)
                 }
             }
@@ -46,7 +46,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val result = deleteCustomerUseCase(customer)
             when (result) {
-                is Resource.Error -> Unit
+                is Resource.Failure -> Unit
                 is Resource.Success -> refresh()
             }
         }

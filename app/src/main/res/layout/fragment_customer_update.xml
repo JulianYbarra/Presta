@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.junka.domain.Customer.Status" />
+        <import type="com.junka.domain.ScoreStatus" />
 
         <import type="com.junka.domain.Customer" />
 
@@ -19,7 +19,7 @@
 
         <variable
             name="status"
-            type="Status" />
+            type="ScoreStatus" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -125,6 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     app:custom_lottie_autoPlay="@{true}"
                     app:custom_lottie_rawId="@{status}" />
             </FrameLayout>
