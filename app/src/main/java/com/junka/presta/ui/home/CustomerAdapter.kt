@@ -8,6 +8,8 @@ import com.junka.domain.Customer
 import com.junka.presta.R
 import com.junka.presta.common.basicDiffUtil
 import com.junka.presta.common.inflate
+import com.junka.presta.common.setColor
+import com.junka.presta.common.setTextColor
 import com.junka.presta.databinding.ViewCustomerLayoutBinding
 
 class CustomerAdapter(
@@ -35,8 +37,14 @@ class CustomerAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ViewCustomerLayoutBinding.bind(view)
 
-        fun bind(customer: Customer){
-            binding.customer = customer
+        fun bind(customer: Customer) = with(binding){
+            nameTv.text = customer.fullName
+            stateView.setColor(customer.score?.getScoreStatus())
+            dniTv.text = customer.dni.toString()
+            statusTv.apply {
+                text = customer.score?.status.orEmpty()
+                setTextColor(customer.score?.getScoreStatus())
+            }
         }
     }
 }

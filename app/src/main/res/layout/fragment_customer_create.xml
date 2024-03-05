@@ -1,128 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <data>
-
-        <import type="com.junka.domain.ScoreStatus" />
-
-        <variable
-            name="loading"
-            type="boolean" />
-
-        <variable
-            name="status"
-            type="ScoreStatus" />
-    </data>
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:hint="@string/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameL"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:inputType="textPersonName" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastnameL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/last_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameL">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/lastnameL"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastnameEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/last_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/nameL">
+                android:inputType="textPersonName" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lastnameEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dniL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/dni"
+            app:layout_constraintBottom_toTopOf="@id/saveBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lastnameL">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/dniL"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dniEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/dni"
-                app:layout_constraintBottom_toTopOf="@id/saveBtn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lastnameL">
+                android:inputType="number" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dniEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/save"
+            app:layout_constraintBottom_toTopOf="@id/cancelBtn"
+            app:layout_constraintTop_toBottomOf="@id/dniL" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/saveBtn"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelBtn"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saveBtn" />
+
+        <FrameLayout
+            android:id="@+id/loadingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:backgroundTint="?attr/colorSurfaceContainerLow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingAnimation"
                 android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading" />
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/stateAnimation"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:enabled="@{!loading}"
-                android:text="@string/save"
-                app:layout_constraintBottom_toTopOf="@id/cancelBtn"
-                app:layout_constraintTop_toBottomOf="@id/dniL" />
+                android:layout_gravity="center"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cancelBtn"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cancel"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/saveBtn" />
+        </FrameLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:visible="@{loading}"
-                android:backgroundTint="?attr/colorSurfaceContainerLow"
-                tools:visibility="gone">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/loadingAnimation"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    app:custom_lottie_autoPlay="@{true}"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/loading" />
-
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/stateAnimation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:custom_lottie_autoPlay="@{true}"
-                    app:custom_lottie_rawId="@{status}" />
-
-            </FrameLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-
-</layout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.junka.presta.R
 import com.junka.presta.common.launchAndCollect
+import com.junka.presta.common.setAnimation
 import com.junka.presta.databinding.FragmentCustomerUpdateBinding
 import com.junka.presta.ui.customer.update.CustomerUpdateViewModel.UiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +19,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CustomerUpdateFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentCustomerUpdateBinding
+    private var _binding : FragmentCustomerUpdateBinding? = null
+    private val binding : FragmentCustomerUpdateBinding
+        get() = _binding!!
+
     private val viewModel by viewModels<CustomerUpdateViewModel>()
 
 
@@ -33,13 +37,13 @@ class CustomerUpdateFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentCustomerUpdateBinding.bind(view)
-        binding.setUi()
+        _binding = FragmentCustomerUpdateBinding.bind(view)
+        setUi(binding)
 
         launchAndCollect(viewModel.state) { setUiState(it) }
     }
 
-    private fun FragmentCustomerUpdateBinding.setUi() {
+    private fun setUi(binding: FragmentCustomerUpdateBinding) = with(binding) {
         saveBtn.setOnClickListener {
             if (validateForm()) {
                 viewModel.update(
@@ -69,12 +73,16 @@ class CustomerUpdateFragment : BottomSheetDialogFragment() {
     }
 
     private fun setUiState(uiState: UiState) = with(binding) {
-        binding.loading = uiState.loading
+        loadingContainer.isVisible = uiState.loading
+        saveBtn.isEnabled = !uiState.loading
         uiState.customer?.let { customer ->
-            binding.customer = customer
+            nameEt.setText(customer.name)
+            lastnameEt.setText(customer.lastName)
+            dniEt.setText(customer.dni.toString())
         }
+
         uiState.status?.let {
-            binding.status = it
+            stateAnimation.setAnimation(it,true)
         }
     }
 
@@ -122,5 +130,10 @@ class CustomerUpdateFragment : BottomSheetDialogFragment() {
             null
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

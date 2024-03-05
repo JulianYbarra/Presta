@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.junka.presta.R
 import com.junka.presta.common.launchAndCollect
+import com.junka.presta.common.setAnimation
 import com.junka.presta.databinding.FragmentCustomerCreateBinding
 import com.junka.presta.ui.customer.create.CustomerCreateViewModel.UiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +19,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CustomerCreateFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentCustomerCreateBinding
+    private var _binding : FragmentCustomerCreateBinding? = null
+    private val binding : FragmentCustomerCreateBinding
+        get() = _binding!!
+
     private val viewModel by viewModels<CustomerCreateViewModel>()
 
     override fun onCreateView(
@@ -32,13 +36,13 @@ class CustomerCreateFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentCustomerCreateBinding.bind(view)
-        binding.setUi()
+        _binding = FragmentCustomerCreateBinding.bind(view)
+        setUi(binding)
 
         launchAndCollect(viewModel.state) { setUiState(it) }
     }
 
-    private fun FragmentCustomerCreateBinding.setUi() {
+    private fun setUi(binding: FragmentCustomerCreateBinding) = with(binding) {
         saveBtn.setOnClickListener {
             if (validateForm()) {
                 viewModel.create(
@@ -68,9 +72,10 @@ class CustomerCreateFragment : BottomSheetDialogFragment() {
     }
 
     private fun setUiState(uiState: UiState) = with(binding) {
-        binding.loading = uiState.loading
+        saveBtn.isEnabled = !uiState.loading
+        loadingContainer.isVisible = uiState.loading
         uiState.status?.let {
-            binding.status = it.getScoreStatus()
+            stateAnimation.setAnimation(it.getScoreStatus(),true)
         }
 
     }
@@ -121,5 +126,9 @@ class CustomerCreateFragment : BottomSheetDialogFragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

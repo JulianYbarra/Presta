@@ -1,39 +1,35 @@
 package com.junka.presta.common
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.DiffUtil
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
+import android.widget.TextView
+import androidx.core.view.isVisible
+import com.airbnb.lottie.LottieAnimationView
+import com.junka.domain.ScoreStatus
+import com.junka.presta.R
 
-fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
-    LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
-
-inline fun <T> basicDiffUtil(
-    crossinline areItemsTheSame: (T, T) -> Boolean = { old, new -> old == new },
-    crossinline areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new }
-) = object : DiffUtil.ItemCallback<T>() {
-    override fun areItemsTheSame(oldItem: T & Any, newItem: T & Any): Boolean =
-        areItemsTheSame(oldItem, newItem)
-
-    override fun areContentsTheSame(oldItem: T & Any, newItem: T & Any): Boolean =
-        areContentsTheSame(oldItem, newItem)
+fun View.setColor(status: ScoreStatus?) {
+    setBackgroundColor(context.statusColor(status))
 }
 
-fun <T> LifecycleOwner.launchAndCollect(
-    flow: Flow<T>,
-    state: Lifecycle.State = Lifecycle.State.STARTED,
-    body: (T) -> Unit
-) {
-    lifecycleScope.launch {
-        this@launchAndCollect.repeatOnLifecycle(state) {
-            flow.collect(body)
-        }
+fun TextView.setTextColor(status: ScoreStatus?) {
+    setTextColor(context.statusColor(status))
+}
+
+fun LottieAnimationView.setAnimation(
+    status: ScoreStatus?,
+    autoStart: Boolean?
+){
+    isVisible = status != null
+
+    if(autoStart == true && visibility == View.GONE) return
+
+    val rawId = when (status) {
+        ScoreStatus.APPROVE -> R.raw.approved
+        ScoreStatus.REJECTED -> R.raw.disapproved
+        ScoreStatus.ERROR -> R.raw.disapproved
+        else -> null
     }
+
+    if(rawId != null) setAnimation(rawId)
+    if(autoStart != null && autoStart) playAnimation()
 }
