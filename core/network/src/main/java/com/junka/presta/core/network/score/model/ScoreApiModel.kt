@@ -1,4 +1,4 @@
-package com.junka.presta.data.remote.model
+package com.junka.presta.core.network.score.model
 
 
 import com.squareup.moshi.Json

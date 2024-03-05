@@ -3,31 +3,22 @@ import java.io.InputStreamReader
 import java.util.Properties
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs")
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
     kotlin("kapt")
 }
 
 android {
-    namespace = "com.junka.presta"
+    namespace = "com.junka.presta.core.network"
     compileSdk = extra["compileSdk.version"]?.toString()?.toInt()
 
     defaultConfig {
-        applicationId = "com.junka.presta"
         minSdk = extra["minSdk.version"]?.toString()?.toInt()
-        targetSdk = extra["targetSdk.version"]?.toString()?.toInt()
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
 
-        buildConfigField("String", "URL_REALTIME", "\"${getLocalProperty("URL_REALTIME")}\"")
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        buildConfigField("String", "URL_BASE", "\"${getLocalProperty("URL_BASE")}\"")
     }
 
     buildTypes {
@@ -48,27 +39,13 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
         buildConfig = true
     }
 }
 
 dependencies {
 
-    implementation(project(":data"))
     implementation(project(":domain"))
-    implementation(project(":usecases"))
-    implementation(project(":core:network"))
-    implementation(project(":core:domain"))
-
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     val hilt_version = "2.50"
     implementation("com.google.dagger:hilt-android:$hilt_version")
@@ -79,17 +56,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
-    implementation("com.airbnb.android:lottie:5.2.0")
-
-    implementation("io.arrow-kt:arrow-core:1.1.2")
-
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    // For instrumentation tests
-    androidTestImplementation( "com.google.dagger:hilt-android-testing:2.50")
-    kaptAndroidTest("com.google.dagger:hilt-compiler:2.50")
-
 }
 
 fun Project.getLocalProperty(key: String, file: String = "local.properties"): Any {

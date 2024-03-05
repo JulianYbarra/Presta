@@ -1,6 +1,6 @@
-package com.junka.presta.data.remote
+package com.junka.presta.core.network.score
 
-import com.junka.presta.data.remote.model.ScoreApiModel
+import com.junka.presta.core.network.score.model.ScoreApiModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -6,7 +6,7 @@ import com.junka.domain.Error
 import com.junka.domain.Resource
 import com.junka.domain.Customer
 import com.junka.domain.Score
-import com.junka.usecases.ScoreCustomerUseCase
+import com.junka.presta.core.domain.ScoreCustomerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

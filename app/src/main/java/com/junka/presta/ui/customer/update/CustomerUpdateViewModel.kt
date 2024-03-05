@@ -8,7 +8,7 @@ import com.junka.domain.Resource
 import com.junka.domain.Customer
 import com.junka.domain.ScoreStatus
 import com.junka.usecases.GetCustomerByIdUseCase
-import com.junka.usecases.ScoreCustomerUseCase
+import com.junka.presta.core.domain.ScoreCustomerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
