@@ -7,10 +7,10 @@ data class CustomerApiModel(
     val name: String = "",
     val lastName: String = "",
     val dni: Int = 0,
-    val score : com.junka.presta.core.model.Score? = null
+    val score : Score? = null
 )
 
-fun CustomerApiModel.toDomainModel(id: String) = com.junka.presta.core.model.Customer(
+fun CustomerApiModel.toDomainModel(id: String) = Customer(
     id,
     name,
     lastName,
@@ -18,4 +18,4 @@ fun CustomerApiModel.toDomainModel(id: String) = com.junka.presta.core.model.Cus
     score
 )
 
-fun com.junka.presta.core.model.Customer.fromDomainModel() = CustomerApiModel(name, lastName, dni, score)
+fun Customer.fromDomainModel() = CustomerApiModel(name, lastName, dni, score)

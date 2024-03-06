@@ -8,5 +8,5 @@ class DeleteCustomerUseCase @Inject constructor(
     private val customerRepository: CustomerRepository,
 ) {
 
-    suspend operator fun invoke(customer : com.junka.presta.core.model.Customer) = customerRepository.delete(customer)
+    suspend operator fun invoke(customer : Customer) = customerRepository.delete(customer)
 }

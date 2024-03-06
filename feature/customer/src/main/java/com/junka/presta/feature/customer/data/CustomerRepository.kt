@@ -12,9 +12,9 @@ class CustomerRepository @Inject constructor(
 
     suspend fun getCustomer(id: String) = remoteDataSource.getCustomer(id)
 
-    suspend fun save(customer: com.junka.presta.core.model.Customer) = remoteDataSource.save(customer)
+    suspend fun save(customer: Customer) = remoteDataSource.save(customer)
 
-    suspend fun saveOrUpdate(customer: com.junka.presta.core.model.Customer) : Resource<com.junka.presta.core.model.Customer> {
+    suspend fun saveOrUpdate(customer: Customer) : Resource<Customer> {
         return if (customer.id != ""){
             update(customer)
         }else{
@@ -22,8 +22,8 @@ class CustomerRepository @Inject constructor(
         }
     }
 
-    suspend fun delete(customer: com.junka.presta.core.model.Customer): Resource<Unit> = remoteDataSource.delete(customer)
+    suspend fun delete(customer: Customer): Resource<Unit> = remoteDataSource.delete(customer)
 
-    suspend fun update(customer: com.junka.presta.core.model.Customer): Resource<com.junka.presta.core.model.Customer> = remoteDataSource.update(customer)
+    suspend fun update(customer: Customer): Resource<Customer> = remoteDataSource.update(customer)
 
 }
