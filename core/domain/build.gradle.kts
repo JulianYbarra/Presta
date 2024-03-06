@@ -34,11 +34,12 @@ android {
 
 dependencies {
 
-    implementation(project(":domain"))
+    implementation(project(":core:model"))
     implementation(project(":core:data"))
-    implementation(project(":data"))
+    implementation(project(":core:common"))
 
     implementation("javax.inject:javax.inject:1")
+
 
     testImplementation(project(":core:testing"))
     testImplementation("junit:junit:4.13.2")

@@ -2,11 +2,10 @@ package com.junka.presta.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.junka.domain.Error
-import com.junka.domain.Resource
-import com.junka.domain.Customer
-import com.junka.usecases.DeleteCustomerUseCase
-import com.junka.usecases.GetCustomersUseCase
+import com.junka.presta.core.model.Customer
+import com.junka.presta.core.common.Resource
+import com.junka.presta.feature.customer.domain.DeleteCustomerUseCase
+import com.junka.presta.feature.customer.domain.GetCustomersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,6 +35,7 @@ class HomeViewModel @Inject constructor(
                 when (result) {
                     is Resource.Failure -> UiState(error = result.error, customers = emptyList())
                     is Resource.Success -> UiState(customers = result.data)
+                    else -> it
                 }
             }
 
@@ -46,8 +46,8 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val result = deleteCustomerUseCase(customer)
             when (result) {
-                is Resource.Failure -> Unit
                 is Resource.Success -> refresh()
+                else -> Unit
             }
         }
     }
@@ -55,6 +55,6 @@ class HomeViewModel @Inject constructor(
     data class UiState(
         val loading: Boolean = false,
         val customers: List<Customer>? = null,
-        val error: Error? = null
+        val error: com.junka.presta.core.common.Error? = null
     )
 }

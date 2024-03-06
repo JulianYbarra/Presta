@@ -5,10 +5,10 @@ plugins {
 
 android {
     namespace = "com.junka.presta.core.testing"
-    compileSdk = 34
+    compileSdk = extra["compileSdk.version"]?.toString()?.toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = extra["minSdk.version"]?.toString()?.toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -35,7 +35,7 @@ android {
 dependencies {
 
     implementation(project(":core:data"))
-    implementation(project(":domain"))
+    implementation(project(":core:model"))
     implementation(project(":core:network"))
 
     implementation("junit:junit:4.13.2")

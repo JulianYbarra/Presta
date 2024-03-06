@@ -1,7 +1,6 @@
 package com.junka.presta.core.data.score
 
-import com.junka.domain.Resource
-import com.junka.domain.Score
+import com.junka.presta.core.common.Resource
 import com.junka.presta.core.testing.data.scoreTestData
 import com.junka.presta.core.testing.datasource.FakeScoreDataSource
 import kotlinx.coroutines.runBlocking

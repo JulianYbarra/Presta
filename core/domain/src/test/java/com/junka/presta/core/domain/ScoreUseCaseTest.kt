@@ -1,6 +1,6 @@
 package com.junka.presta.core.domain
 
-import com.junka.domain.Resource
+import com.junka.presta.core.common.Resource
 import com.junka.presta.core.testing.data.scoreTestData
 import com.junka.presta.core.testing.repository.ScoreRepositoryFake
 import kotlinx.coroutines.runBlocking
@@ -8,7 +8,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Test
 
-class ScoreUseCaseTest{
+class ScoreUseCaseTest {
 
     @Test
     fun `when invoke is called, then call repository score`(){

@@ -4,12 +4,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.junka.domain.Customer
+import com.junka.presta.core.model.Customer
 import com.junka.presta.R
-import com.junka.presta.common.basicDiffUtil
-import com.junka.presta.common.inflate
-import com.junka.presta.common.setColor
-import com.junka.presta.common.setTextColor
+import com.junka.presta.core.ui.extensions.basicDiffUtil
+import com.junka.presta.core.ui.extensions.inflate
+import com.junka.presta.core.ui.extensions.setColor
+import com.junka.presta.core.ui.extensions.setTextColor
 import com.junka.presta.databinding.ViewCustomerLayoutBinding
 
 class CustomerAdapter(

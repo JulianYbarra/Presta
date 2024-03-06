@@ -23,7 +23,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "URL_REALTIME", "\"${getLocalProperty("URL_REALTIME")}\"")
+
 
         vectorDrawables {
             useSupportLibrary = true
@@ -55,11 +55,12 @@ android {
 
 dependencies {
 
-    implementation(project(":data"))
-    implementation(project(":domain"))
-    implementation(project(":usecases"))
-    implementation(project(":core:network"))
+    implementation(project(":core:designsystem"))
     implementation(project(":core:domain"))
+    implementation(project(":core:common"))
+    implementation(project(":core:model"))
+    implementation(project(":core:network"))
+    implementation(project(":feature:customer"))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -69,19 +70,14 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation(project(":core:ui"))
 
     val hilt_version = "2.50"
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-compiler:$hilt_version")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-
     implementation("com.airbnb.android:lottie:5.2.0")
-
-    implementation("io.arrow-kt:arrow-core:1.1.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

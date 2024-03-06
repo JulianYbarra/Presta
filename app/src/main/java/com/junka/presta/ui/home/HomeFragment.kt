@@ -2,15 +2,18 @@ package com.junka.presta.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import com.junka.presta.R
-import com.junka.presta.common.errorToString
-import com.junka.presta.common.launchAndCollect
+import com.junka.presta.core.ui.extensions.errorToString
+import com.junka.presta.core.ui.extensions.launchAndCollect
 import com.junka.presta.databinding.FragmentHomeBinding
+import com.junka.presta.feature.customer.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,8 +27,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val customerAdapter by lazy {
         CustomerAdapter(
             onClick = {
-                val action = HomeFragmentDirections.toCustomerUpdateDest(it.id)
-                findNavController().navigate(action)
+                val request = NavDeepLinkRequest.Builder
+                    .fromUri(Navigation.Update(it.id).getArgRoute().toUri())
+                    .build()
+                findNavController().navigate(request)
             },
             onLongClick = { customer ->
                 viewModel.onDelete(customer)
@@ -45,7 +50,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setUi(binding : FragmentHomeBinding) = with(binding) {
         recycler.adapter = customerAdapter
         createFab.setOnClickListener {
-            findNavController().navigate(R.id.customerCreateDest)
+            val request = NavDeepLinkRequest.Builder
+                .fromUri(Navigation.Create.route.toUri())
+                .build()
+            findNavController().navigate(request)
         }
         swipeRefresh.setOnRefreshListener {
             swipeRefresh.isRefreshing = false
@@ -57,7 +65,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         progress.isVisible = uiState.loading
         customerAdapter.submitList(uiState.customers)
         errorTv.text = uiState.error?.errorToString(requireContext()).orEmpty()
-
     }
 
     override fun onDestroyView() {

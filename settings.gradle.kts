@@ -26,11 +26,16 @@ dependencyResolutionManagement {
 
 rootProject.name = "Presta"
 include(":app")
-include(":data")
-include(":domain")
-include(":usecases")
+
 include(":core")
+include(":core:common")
 include(":core:data")
-include(":core:network")
+include(":core:designsystem")
 include(":core:domain")
+include(":core:network")
+include(":core:model")
 include(":core:testing")
+include(":core:ui")
+
+include(":feature")
+include(":feature:customer")

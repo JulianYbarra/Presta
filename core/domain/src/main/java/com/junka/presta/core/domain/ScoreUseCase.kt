@@ -1,7 +1,7 @@
 package com.junka.presta.core.domain
 
-import com.junka.domain.Resource
-import com.junka.domain.Score
+import com.junka.presta.core.model.Score
+import com.junka.presta.core.common.Resource
 import com.junka.presta.core.data.score.ScoreRepository
 import javax.inject.Inject
 

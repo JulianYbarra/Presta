@@ -35,8 +35,9 @@ android {
 
 dependencies {
 
-    implementation(project(":domain"))
+    implementation(project(":core:model"))
     implementation(project(":core:network"))
+    implementation(project(":core:common"))
     testImplementation(project(":core:testing"))
 
     val hilt_version = "2.50"

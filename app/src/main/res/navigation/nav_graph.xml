@@ -7,24 +7,22 @@
     <fragment
         android:id="@+id/homeDest"
         android:name="com.junka.presta.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/to_customerCreateDest"
-            app:destination="@id/customerCreateDest" />
-        <action
-            android:id="@+id/to_customerUpdateDest"
-            app:destination="@id/customerUpdateDest" />
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
     <dialog
         android:id="@+id/customerCreateDest"
-        android:name="com.junka.presta.ui.customer.create.CustomerCreateFragment"
-        tools:layout="@layout/fragment_customer_create" />
+        android:name="com.junka.presta.feature.customer.presentation.create.CustomerCreateFragment"
+        tools:layout="@layout/fragment_customer_create" >
+        <deepLink
+            app:uri="app://presta/customer_create"/>
+    </dialog>
     <dialog
         android:id="@+id/customerUpdateDest"
-        android:name="com.junka.presta.ui.customer.update.CustomerUpdateFragment"
+        android:name="com.junka.presta.feature.customer.presentation.update.CustomerUpdateFragment"
         tools:layout="@layout/fragment_customer_update">
         <argument
             android:name="id"
             app:argType="string" />
+        <deepLink
+            app:uri="app://presta/customer_update/{id}"/>
     </dialog>
 </navigation>
