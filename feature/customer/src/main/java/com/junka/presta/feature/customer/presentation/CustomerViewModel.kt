@@ -1,4 +1,4 @@
-package com.junka.presta.ui.home
+package com.junka.presta.feature.customer.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class CustomerViewModel @Inject constructor(
     private val getCustomersUseCase: GetCustomersUseCase,
     private val deleteCustomerUseCase: DeleteCustomerUseCase
 ) : ViewModel() {

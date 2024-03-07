@@ -19,7 +19,7 @@ android {
         minSdk = extra["minSdk.version"]?.toString()?.toInt()
         targetSdk = extra["targetSdk.version"]?.toString()?.toInt()
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

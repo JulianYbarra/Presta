@@ -3,26 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeDest">
-    <fragment
-        android:id="@+id/homeDest"
-        android:name="com.junka.presta.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home"/>
-    <dialog
-        android:id="@+id/customerCreateDest"
-        android:name="com.junka.presta.feature.customer.presentation.create.CustomerCreateFragment"
-        tools:layout="@layout/fragment_customer_create" >
-        <deepLink
-            app:uri="app://presta/customer_create"/>
-    </dialog>
-    <dialog
-        android:id="@+id/customerUpdateDest"
-        android:name="com.junka.presta.feature.customer.presentation.update.CustomerUpdateFragment"
-        tools:layout="@layout/fragment_customer_update">
-        <argument
-            android:name="id"
-            app:argType="string" />
-        <deepLink
-            app:uri="app://presta/customer_update/{id}"/>
-    </dialog>
+    app:startDestination="@id/nav_customer">
+
+    <include app:graph="@navigation/nav_customer" />
 </navigation>
